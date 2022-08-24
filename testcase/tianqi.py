@@ -1,7 +1,5 @@
 import requests
-from utils.RequestsUtil import requests_get
-from utils.RequestsUtil import requests_post
-import json
+from utils.RequestsUtil import Requests
 
 
 def get_weather():
@@ -9,10 +7,10 @@ def get_weather():
     data = {"city": "上海",
             "key": "2dadd5618a277d261b4eb0733fb956c9"
             }
-    jsons = json.dumps(data)
-    response = requests_post(url, json=jsons)
+    response = Requests()
+    r = response.post(url, data=data)
     # 发起get请求
-    print(response)
+    print(r)
     # 打印结果
 
 
