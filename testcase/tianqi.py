@@ -9,7 +9,7 @@ def get_weather():
             }
     response = Requests()
     r = response.post(url, data=data)
-    # 发起get请求
+    # 发起get请求-
     print(r)
     # 打印结果
 

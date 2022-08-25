@@ -1,0 +1,41 @@
+#字典
+#name: "test_yaml"
+#result: "sucess"
+#列表
+#  - "a"
+#  - "b"
+#  - "c"
+#字典嵌套字典
+#person1:
+# name: "xiaoming"
+# age: 18
+#person2:
+#  name: "xiaohong"
+#  age: 20
+#字典嵌套列表
+#dict:
+# - "a"
+# - "b"
+# - "c"
+#列表嵌套字典
+#- list:
+#   name: xiaohong
+#   age: 18
+#- list1:
+#   name: xiaohei
+#   age: 20
+#列表嵌套列表
+#-
+#   - "a"
+#   - "b"
+#   - "c"
+#-
+#   - 1
+#   - 2
+#   - 3
+---
+username: taotao
+password: 15539420100
+---
+username: xiaolibi
+password: 15290007209
