@@ -1,0 +1,28 @@
+
+
+#登陆测试用例
+---
+#测试用例名称
+"case_name": "登陆成功用例"
+#url地址
+"url": "/simpleWeather/query"
+#data
+"data":
+  city: "上海"
+  key: "2dadd5618a277d261b4eb0733fb956c9"
+#期望结果
+"expect":
+  'code': 200
+
+
+---
+"case_name": "登陆失败用例"
+#url地址
+"url": "/simpleWeather/query"
+#data
+"data":
+  city: "周口"
+  key: "2dadd5618a277d261b4eb0733fb956c9"
+#期望结果
+"expect":
+  'code': 200

@@ -1,0 +1,15 @@
+
+
+db_1:
+  db_host: "127.0.0.1"
+  db_user: "root"
+  db_password: "199751"
+  db_name: "students"
+  db_charset: "utf8"
+  db_port: "3306"
+
+
+
+
+
+
