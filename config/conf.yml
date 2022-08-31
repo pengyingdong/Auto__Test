@@ -6,3 +6,5 @@ BASE:
   log_extension: ".log"
   test:
     url: "http://apis.juhe.cn"
+    case_file: "testdata.xls"
+    case_sheet: "天气查询"
