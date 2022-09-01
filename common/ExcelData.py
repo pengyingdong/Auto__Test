@@ -11,8 +11,10 @@ class Data:
     def get_run_data(self):
         run_list = list()
         for line in self.reader.data():
-            if str(line[DataConfig().is_run]).lower() == "Y":
+            if str(line[DataConfig().is_run]).lower() == "y":
                 # print(line)
                 # 3.保存要执行结果，放到新的列表
                 run_list.append(line)
         return run_list
+
+
