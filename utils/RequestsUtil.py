@@ -7,16 +7,16 @@ class Requests:
     def __init__(self):
         self.log = my_log("Reqiests")
 
-    def requests_api(self, url, params=None, data=None, json=None, method="get"):
+    def requests_api(self, url, params=None, data=None, json=None, headers=None, cookies=None, method="get"):
         # 定义公共方法
         if method == "get":
             # 如果method是gte执行下面的代码
             self.log.debug("发送get请求")
-            a = requests.get(url, params=params)
+            a = requests.get(url, params=params, headers=headers, cookies=cookies)
         elif method == "post":
             # 如果method是post执行下面的代码
             self.log.debug("发送post请求")
-            a = requests.post(url, data=data, json=json)
+            a = requests.post(url, data=data, json=json, headers=headers, cookies=cookies)
         code = a.status_code
         # 获取code码
         try:
