@@ -22,7 +22,7 @@ class Data:
         run_list = list()
         for line in self.reader.data():
             run_list.append(line)
-            return run_list
+        return run_list
 
     def get_case_pre(self, pre):
         """在所有用例里根据前置条件获取用例，如果没有就返回None"""

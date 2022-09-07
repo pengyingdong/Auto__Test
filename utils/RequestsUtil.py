@@ -20,13 +20,13 @@ class Requests:
         code = a.status_code
         # 获取code码
         try:
-            json = a.json()
+            body = a.json()
         except Exception as e:
-            json = a.text
+            body = a.text
         # 判断返回的结果是json或者是text
         r = dict()
         r["code"] = code
-        r["json"] = json
+        r["body"] = body
         # 将返回的结果放到一个空字典里
         return r
 

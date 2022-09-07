@@ -7,6 +7,7 @@ from common import ExcelConfig
 from utils.RequestsUtil import Requests
 import pytest
 from common import Base
+import re
 
 # 1.初始化信息
 # 1.初始化测试用例文件
@@ -26,19 +27,20 @@ data_key = ExcelConfig.DataConfig
 # 2.编写测试用例方法，参数化运行
 class TestExcel:
 
-    def run_api(self, url, method, params=None, header=None, cookie=None):
+    def run_api(self, url, method, param=None, header=None, cookie=None):
         """发送请求"""
         requests = Requests()
-        if len(str(params).strip()) is not 0:
-            """验证params有没有内容"""
-            params = json.loads(params)
-            """把params转义json"""
+        # if len(str(params).strip()) is not 0:
+        #     """验证params有没有内容"""
+        #     params = json.loads(params)
+        #     """把params转义json"""
         if str(method).lower() == "get":
-            res = requests.get(url, params=params, headers=header, cookies=cookie)
+            res = requests.get(url, params=param, headers=header, cookies=cookie)
         elif str(method).lower() == "post":
-            res = requests.post(url, data=params, headers=header, cookies=cookie)
+            res = requests.post(url, data=param, headers=header, cookies=cookie)
         else:
             log.error(f"错误请求method：{method}")
+        # print(res)
         return res
 
     def run_pre(self, pre_case):
@@ -49,10 +51,12 @@ class TestExcel:
         headers = pre_case[data_key.headers]
         cookies = pre_case[data_key.cookies]
         # 转义headers
+        param = Base.json_parse(params)
         header = Base.json_parse(headers)
         cookie = Base.json_parse(cookies)
-        res = self.run_api(url, method, params, header, cookie)
-        print(res)
+        res = self.run_api(url, method, param, header, cookie)
+        print(f"前置用例执行{res}")
+        return res
 
     # 1.初始化信息，url,data
 
@@ -63,7 +67,6 @@ class TestExcel:
     def test_run(self, case):
         """执行可以执行接口测试用例"""
         # 3.重构函数内容
-        data_key = ExcelConfig.DataConfig
         url = ConfigYaml().get_conf_url() + case[data_key.url]
         params = case[data_key.params]
         case_id = case[data_key.case_id]
@@ -80,40 +83,71 @@ class TestExcel:
         cookies = case[data_key.cookies]
         code = case[data_key.code]
         db_verify = case[data_key.db_verify]
-        if headers:
-            # 转义headers
-            header = json.loads(headers)
-        else:
-            header = headers
-        if cookies:
-            # 转义cookies
-            cookie = json.loads(cookies)
-        else:
-            cookie = cookies
+        # if headers:
+        #     # 转义headers
+        #     header = json.loads(headers)
+        # else:
+        #     header = headers
+        # if cookies:
+        #     # 转义cookies
+        #     cookie = json.loads(cookies)
+        # else:
+        #     cookie = cookies
+
         # 验证前置条件
         if pre_exec:
-            pass
-
             pre_case = data_init.get_case_pre(pre_exec)
             print(f"前置条件为：{pre_case}")
-            self.run_pre(pre_case)
-            # 前置条件用例
+            pre_res = self.run_pre(pre_case)
+            headers, cookies, params = self.get_correlation(headers, cookies, params, pre_res)
+            header = Base.json_parse(headers)
+            cookie = Base.json_parse(cookies)
+            param = Base.json_parse(params)
+            res = self.run_api(url, method, param, header, cookie)
+            print(f"测试用例执行{res}")
+        # 前置条件用例
         # 2.接口请求
-        requests = Requests()
-        if len(str(params).strip()) is not 0:
-            """验证params有没有内容"""
-            params = json.loads(params)
-            """把params转义json"""
-        if str(method).lower() == "get":
-            res = requests.get(url, params=params, headers=headers, cookies=cookie)
-        elif str(method).lower() == "post":
-            res = requests.post(url, data=params, headers=header, cookies=cookie)
-        else:
-            log.error(f"错误请求method：{method}")
-        print(res)
+        # requests = Requests()
+        # if len(str(params).strip()) is not 0:
+        #     """验证params有没有内容"""
+        #     params = json.loads(params)
+        #     """把params转义json"""
+        # if str(method).lower() == "get":
+        #     res = requests.get(url, params=params, headers=headers, cookies=cookie)
+        # elif str(method).lower() == "post":
+        #     res = requests.post(url, data=params, headers=header, cookies=cookie)
+        # else:
+        #     log.error(f"错误请求method：{method}")
+        # print(res)
+
+    def get_correlation(self, headers, cookies, params, pre_res):
+        """关联"""
+        headers_para, cookies_para, params_para = Base.params_find(headers, cookies, params)
+        if len(headers_para):
+            headers_data = pre_res["body"][headers_para[0]]
+            headers = Base.res_sub(headers, headers_data)
+        if len(cookies_para):
+            cookies_data = pre_res["body"][cookies_para[0]]
+            cookies = Base.res_sub(cookies, cookies_data)
+        if len(params_para):
+            params_data = pre_res["body"]["result"][params_para[0]]
+            params = Base.res_sub(params, params_data)
+        return headers, cookies, params
 
 
-# TestExcel().test_run()
-# 4.pytest.main
 if __name__ == '__main__':
+    pass
+    # str1 = '{"Authorization":"JWT ${token}$"}'
+    # if "${" in str1:
+    #     print(str1)
+    # pattern = re.compile("\${.*}\$")
+    # # 正则表达式获取\${.*}\$里的内容
+    # re_res = pattern.findall(str1)
+    # # 查找str1内和\${.*}\$匹配的内容
+    # print(re_res[0])
+    # # 打印一条
+    # token = "123"
+    # res = re.sub(pattern, token, str1)
+    # # 替换token内容
+    # print(res)
     pytest.main()
