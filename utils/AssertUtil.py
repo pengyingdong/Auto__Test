@@ -47,7 +47,7 @@ class AssertUtil:
         :return:
         """
         try:
-            body = json.dumps(body)
+            # body = json.dumps(body)
             assert expected_body in body
         except:
             self.log.error(f"不包含body或者body是错误，body是：{body}expected_body是：{expected_body}")

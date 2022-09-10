@@ -2,8 +2,11 @@ import json
 import re
 from config.Conf import ConfigYaml
 from utils.MysqlUtil import Mysql
+from utils.AssertUtil import AssertUtil
+from utils.LogUtil import my_log
 
 p_data = '\${(.*)}\$'
+log = my_log()
 
 
 # 1.定义init_db
@@ -21,6 +24,26 @@ def init_db(db_alias):
     conn = Mysql(host, user, password, db_name, charset, port)
     print(conn)
     return conn
+
+
+def assert_db(db_name, result, db_verify):
+    assert_util = AssertUtil()
+    # 1.初始化数据库
+    # sql = init_db("db_1")
+    db_res = sql = init_db(db_name)
+    # 2.查询sql，excel内容
+    db_res = sql.fetchone(db_verify)
+    log.debug(f"数据库查询结果:{str(db_res)}")
+    # 3.数据库的结果与接口返回的结果验证
+    # 获取数据库结果的key
+    verify_list = list(dict(db_res).keys())
+    # 根据key获取数据库结果，接口结果
+    for line in verify_list:
+        # res_line = res["body"][line]
+        res_line = result[line]
+        res_db_line = dict(db_res)[line]
+        # 验证
+        assert_util.assert_body(res_line, res_db_line)
 
 
 def json_parse(data):

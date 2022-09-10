@@ -7,7 +7,9 @@ from common import ExcelConfig
 from utils.RequestsUtil import Requests
 import pytest
 from common import Base
+from utils.AssertUtil import AssertUtil
 import re
+from common.Base import init_db
 
 # 1.初始化信息
 # 1.初始化测试用例文件
@@ -100,11 +102,34 @@ class TestExcel:
             print(f"前置条件为：{pre_case}")
             pre_res = self.run_pre(pre_case)
             headers, cookies, params = self.get_correlation(headers, cookies, params, pre_res)
-            header = Base.json_parse(headers)
-            cookie = Base.json_parse(cookies)
-            param = Base.json_parse(params)
-            res = self.run_api(url, method, param, header, cookie)
-            print(f"测试用例执行{res}")
+        header = Base.json_parse(headers)
+        cookie = Base.json_parse(cookies)
+        param = Base.json_parse(params)
+        res = self.run_api(url, method, param, header, cookie)
+        print(f"测试用例执行{res}")
+
+        # 断言验证
+        # 状态码，返回结果内容，数据库相关的结果验证
+        # 状态码
+        assert_util = AssertUtil()
+        assert_util.assert_code(int(res["code"]), int(code))
+        assert_util.assert_in_body(str(res["body"]), str(expect_result))
+        Base.assert_db("db_1", res["body"], db_verify)
+        # 数据库结果断言
+        # # 1.初始化数据库
+        # sql = init_db("db_1")
+        # # 2.查询sql，excel内容
+        # db_res = sql.fetchone(db_verify)
+        # log.debug(f"数据库查询结果:{str(db_res)}")
+        # # 3.数据库的结果与接口返回的结果验证
+        # # 获取数据库结果的key
+        # verify_list = list(dict(db_res).keys())
+        # # 根据key获取数据库结果，接口结果
+        # for line in verify_list:
+        #     res_line = res["body"][line]
+        #     res_db_line = dict(db_res)[line]
+        #     # 验证
+        #     assert_util.assert_body(res_line, res_db_line)
         # 前置条件用例
         # 2.接口请求
         # requests = Requests()
