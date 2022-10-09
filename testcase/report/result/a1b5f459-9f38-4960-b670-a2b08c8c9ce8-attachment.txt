@@ -1,0 +1,3 @@
+DEBUG    Reqiests:RequestsUtil.py:18 发送post请求
+DEBUG    Reqiests:RequestsUtil.py:18 发送post请求
+DEBUG    D:\Auto_Test\utils\LogUtil.py:Base.py:36 数据库查询结果:{'reason': '查询成功!'}

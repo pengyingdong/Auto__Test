@@ -8,6 +8,8 @@ from utils.RequestsUtil import Requests
 import pytest
 from common import Base
 from utils.AssertUtil import AssertUtil
+import allure
+from config import Conf
 import re
 from common.Base import init_db
 
@@ -108,6 +110,16 @@ class TestExcel:
         res = self.run_api(url, method, param, header, cookie)
         print(f"测试用例执行{res}")
 
+        # allure
+        # sheet名称：feature 一级标签
+        allure.dynamic.feature(case_name)
+        # 模块  story 二级标签
+        allure.dynamic.story(case_model)
+        # 用例ID+接口名称  title
+        allure.dynamic.title(case_id + case_name)
+        # 请求URL  请求类型  期望结果  实际结果描述
+        desc = f"<font color='red'>请求URL：</font>{url} <Br/>请求类型：{method} <Br/>期望结果：{expect_result} <Br/>实际结果：{res} <Br/>"
+        allure.dynamic.description(desc)
         # 断言验证
         # 状态码，返回结果内容，数据库相关的结果验证
         # 状态码
@@ -175,4 +187,8 @@ if __name__ == '__main__':
     # res = re.sub(pattern, token, str1)
     # # 替换token内容
     # print(res)
-    pytest.main()
+    report_path = Conf.get_report_path() + os.sep + "result"
+    report_html = Conf.get_report_path() + os.sep + "html"
+    pytest.main(["-s", "test_excel_case.py", "--alluredir", report_path])
+    # Base.allure_report(report_path, report_html)
+    # Base.send_mail(title="接口测试报告", content=report_html)

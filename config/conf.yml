@@ -8,3 +8,10 @@ BASE:
     url: "http://apis.juhe.cn"
     case_file: "testdata.xls"
     case_sheet: "天气查询"
+
+
+email:
+  smtpserver: "smtp.163.com"
+  username: "p976410029@163.com"
+  password: "DKCZVWZHWCRKFADD"
+  receiver: "p976410029@163.com"

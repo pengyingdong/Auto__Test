@@ -1,9 +1,12 @@
 import json
 import re
+import subprocess
+
 from config.Conf import ConfigYaml
 from utils.MysqlUtil import Mysql
 from utils.AssertUtil import AssertUtil
 from utils.LogUtil import my_log
+from utils.EmailUtil import SendEmail
 
 p_data = '\${(.*)}\$'
 log = my_log()
@@ -76,6 +79,35 @@ def params_find(headers, cookies, params):
     if "${" in params:
         params = res_find(params)
     return headers, cookies, params
+
+
+def allure_report(report_path, report_html):
+    """生成allure报告"""
+    allure_cmd = f"allure generate {report_path} -o {report_html} --clean"
+    log.info("报告地址")
+    try:
+        subprocess.call(allure_cmd, shell=True)
+    except:
+        log.error("执行用例失败，请检查一下测试环境相关配置")
+        raise
+
+
+def send_mail(report_html_path="", content="", title="测试"):
+    """发送邮件"""
+    email_info = ConfigYaml().get_email_info()
+    smtp_addr = email_info["smtpserver"]
+    username = email_info["username"]
+    password = email_info["password"]
+    recv = email_info["receiver"]
+    email = SendEmail(
+        smtp_addr=smtp_addr,
+        username=username,
+        password=password,
+        recv=recv,
+        title=title,
+        content=content,
+        file=report_html_path)
+    email.semd_mail()
 
 
 if __name__ == '__main__':

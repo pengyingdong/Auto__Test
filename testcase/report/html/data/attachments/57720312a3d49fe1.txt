@@ -1,0 +1,3 @@
+2022-09-11 16:48:23,382 Reqiests DEBUG 发送post请求
+2022-09-11 16:48:23,549 Reqiests DEBUG 发送post请求
+2022-09-11 16:48:23,705 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}

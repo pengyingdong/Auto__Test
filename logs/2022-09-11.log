@@ -1,0 +1,35 @@
+2022-09-11 16:32:37,352 Reqiests DEBUG 发送post请求
+2022-09-11 16:32:37,516 Reqiests DEBUG 发送post请求
+2022-09-11 16:32:37,690 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 16:36:52,321 Reqiests DEBUG 发送post请求
+2022-09-11 16:36:52,470 Reqiests DEBUG 发送post请求
+2022-09-11 16:36:52,613 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 16:39:26,485 Reqiests DEBUG 发送post请求
+2022-09-11 16:39:26,636 Reqiests DEBUG 发送post请求
+2022-09-11 16:39:26,789 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 16:48:23,382 Reqiests DEBUG 发送post请求
+2022-09-11 16:48:23,549 Reqiests DEBUG 发送post请求
+2022-09-11 16:48:23,705 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 17:36:22,737 Reqiests DEBUG 发送post请求
+2022-09-11 17:36:22,911 Reqiests DEBUG 发送post请求
+2022-09-11 17:36:23,066 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 17:37:42,574 Reqiests DEBUG 发送post请求
+2022-09-11 17:37:42,740 Reqiests DEBUG 发送post请求
+2022-09-11 17:37:42,897 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 17:39:38,533 Reqiests DEBUG 发送post请求
+2022-09-11 17:39:38,693 Reqiests DEBUG 发送post请求
+2022-09-11 17:39:38,843 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 17:41:41,985 Reqiests DEBUG 发送post请求
+2022-09-11 17:41:42,147 Reqiests DEBUG 发送post请求
+2022-09-11 17:41:42,303 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 17:44:10,862 Reqiests DEBUG 发送post请求
+2022-09-11 17:44:11,025 Reqiests DEBUG 发送post请求
+2022-09-11 17:44:11,188 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 21:00:23,416 Reqiests DEBUG 发送post请求
+2022-09-11 21:00:23,577 Reqiests DEBUG 发送post请求
+2022-09-11 21:00:23,733 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 21:00:23,739 D:\Auto_Test\utils\LogUtil.py INFO 报告地址
+2022-09-11 21:12:03,455 Reqiests DEBUG 发送post请求
+2022-09-11 21:12:03,614 Reqiests DEBUG 发送post请求
+2022-09-11 21:12:03,755 D:\Auto_Test\utils\LogUtil.py DEBUG 数据库查询结果:{'reason': '查询成功!'}
+2022-09-11 21:12:03,758 D:\Auto_Test\utils\LogUtil.py INFO 报告地址
